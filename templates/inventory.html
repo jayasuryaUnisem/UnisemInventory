@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+	<ul class="nav navbar-nav">
+          <li><a href="{{url_for('home')}}">Home</a></li>
+          <li class="active"><a href="{{url_for('inventory')}}">Inventory</a></li>
+          <li><a href="#">Need Components</a></li>
+          <li><a href="#">Timesheet</a></li>
+  </ul>
+  
+{% endblock %}
+
+{% block jumbotron%}
+<ul class="nav navbar-nav">
+  <li id="contact"><a href="#">Inward Entry</a></li>
+  
+</ul>
+{% endblock %}
+
+{% block body %}
+
+<div class="centerDiv">
+<div class="row">
+  <div class="column myBtn">
+    <a class="btn" href="#" id="A1" onClick="reply_click(this.id)">Column 11</a>
+  </div>
+  <div class="column myBtn">
+    <a class="btn" href="#" id="A2" onClick="reply_click(this.id)">Column 12</a>
+  </div>
+  <div class="column myBtn">
+    <a class="btn" href="#" id="A3" onClick="reply_click(this.id)">Column 13</a>
+  </div>
+  <div class="column myBtn">
+    <a class="btn" href="#" id="A4" onClick="reply_click(this.id)">Column 14</a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column myBtn">
+    <a class="btn" href="#" id="B1" onClick="reply_click(this.id)">Column 21</a>
+  </div>
+  <div class="column myBtn">
+    <a class="btn" href="#" id="B2" onClick="reply_click(this.id)">Column 22</a>
+  </div>
+  <div class="column myBtn">
+    <a class="btn" href="#" id="B3" onClick="reply_click(this.id)">Column 23</a>
+  </div>
+  <div class="column myBtn">
+    <a class="btn" href="#" id="B4" onClick="reply_click(this.id)">Column 24</a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column myBtn">
+    <a class="btn" href="#" id="C1" onClick="reply_click(this.id)">Column 31</a>
+  </div>
+  <div class="column myBtn">
+    <a class="btn" href="#" id="C2" onClick="reply_click(this.id)">Column 32</a>
+  </div>
+  <div class="column myBtn">
+    <a class="btn" href="#" id="C3" onClick="reply_click(this.id)">Column 33</a>
+  </div>
+  <div class="column myBtn">
+    <a class="btn" href="#" id="C4" onClick="reply_click(this.id)">Column 34</a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column myBtn">
+    <a class="btn" href="#" id="C1" onClick="reply_click(this.id)">Column 41</a>
+  </div>
+  <div class="column myBtn">
+    <a class="btn" href="#" id="C2" onClick="reply_click(this.id)">Column 42</a>
+  </div>
+  <div class="column myBtn">
+    <a class="btn" href="#" id="C3" onClick="reply_click(this.id)">Column 43</a>
+  </div>
+  <div class="column myBtn">
+    <a class="btn" href="#" id="C4" onClick="reply_click(this.id)">Column 44</a>
+  </div>
+</div>
+</div>
+{% endblock %}

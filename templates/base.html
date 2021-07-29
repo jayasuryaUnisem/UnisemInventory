@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* The Modal (background) */
+    .modal {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* Stay in place */
+      z-index: 1;
+      /* Sit on top */
+      padding-top: 100px;
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.4);
+      /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 0;
+      border: 1px solid #888;
+      width: 80%;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @-webkit-keyframes animatetop {
+      from {
+        top: -300px;
+        opacity: 0
+      }
+
+      to {
+        top: 0;
+        opacity: 1
+      }
+    }
+
+    @keyframes animatetop {
+      from {
+        top: -300px;
+        opacity: 0
+      }
+
+      to {
+        top: 0;
+        opacity: 1
+      }
+    }
+
+    /* The Close Button */
+    .close {
+      color: white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .modal-header {
+      padding: 2px 16px;
+      background-color: #5cb85c;
+      color: white;
+    }
+
+    .modal-body {
+      padding: 2px 16px;
+    }
+
+    .modal-footer {
+      padding: 2px 16px;
+      background-color: #5cb85c;
+      color: white;
+    }
+
+    /*popup form*/
+
+
+    #contactForm {
+      display: none;
+      border: 6px solid salmon;
+      padding: 2em;
+      width: 500px;
+      height: 400px;
+      text-align: center;
+      background: #fff;
+      position: fixed;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+    }
+
+    input,
+    textarea {
+      margin: 1em auto;
+      font-family: inherit;
+      text-transform: inherit;
+      font-size: inherit;
+
+      display: block;
+      width: 280px;
+      padding: 0.4em;
+    }
+
+    textarea {
+      height: 80px;
+      resize: none;
+    }
+
+    .formBtn {
+      width: 140px;
+      display: inline-block;
+
+      background: teal;
+      color: #fff;
+      font-weight: 100;
+      font-size: 1.2em;
+      border: none;
+      height: 30px;
+    }
+
+    .popupform {
+      padding: 12px 20px;
+      margin: 8px 0;
+    }
+    
+  </style>
+  <title>Unisem Inventory</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+  {% block head %} {% endblock %}
+</head>
+
+<body>
+
+  <div class="jumbotron">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">UNISEM</a>
+        </div>
+        {% block navbar %} {% endblock %}
+      </div>
+    </nav>
+    {% block jumbotron%} {% endblock %}
+
+  </div>
+  {% block body %} {% endblock %}
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2 id="value"></h2>
+      </div>
+      <div class="modal-body">
+        <table id="customers">
+          <tr>
+            <th>Manufacturer Pno</th>
+            <th>Description</th>
+            <th>Bin No</th>
+            <th>Quantity</th>
+            <th>Unisem Pno</th>
+            <th>Last IW Date</th>
+          </tr>
+          <tr>
+            <td>RSI001</td>
+            <td>120ohm</td>
+            <td>A12</td>
+            <td>12</td>
+            <td>UNI-RSI001</td>
+            <td>22/07/21</td>
+          </tr>
+          <tr>
+            <td>RSI001</td>
+            <td>120ohm</td>
+            <td>A12</td>
+            <td>12</td>
+            <td>UNI-RSI001</td>
+            <td>22/07/21</td>
+          </tr>
+          <tr>
+            <td>RSI001</td>
+            <td>120ohm</td>
+            <td>A12</td>
+            <td>12</td>
+            <td>UNI-RSI001</td>
+            <td>22/07/21</td>
+          </tr>
+          <tr>
+            <td>RSI001</td>
+            <td>120ohm</td>
+            <td>A12</td>
+            <td>12</td>
+            <td>UNI-RSI001</td>
+            <td>22/07/21</td>
+          </tr>
+          <tr>
+            <td>RSI001</td>
+            <td>120ohm</td>
+            <td>A12</td>
+            <td>12</td>
+            <td>UNI-RSI001</td>
+            <td>22/07/21</td>
+          </tr>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <h3 id="value"></h3>
+      </div>
+    </div>
+
+  </div>
+  <div id="contactForm" style="overflow-y:scroll;">
+
+    <h1>Unisem Inward Entry</h1>
+    <small>Under-Construction</small>
+
+    <form class="popupform" action="#">
+      <div style="margin-left: 30px;">
+      <div class="row">
+        <div class="column">
+          <a class="btn" href="#" id="active" onclick="ShowAcitve()">Active</a>
+        </div>
+        <div class="column">
+          <a class="btn" href="#" id="passive" onclick="ShowPassive()">Passive</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <a class="btn" href="#" id="discrete" onclick="ShowDiscrete()">Discrete</a>
+        </div>
+        <div class="column">
+          <a class="btn" href="#" id="connector" onclick="ShowConnector()">Connectors</a>
+        </div>
+      </div>
+      <div id="passiveDis" STYLE="display:none">
+        <div class="row">
+          <div class="column">
+            <a class="btn" href="#" id="resistor" onclick="ShowResistor()">Resistor</a>
+          </div>
+          <div class="column">
+            <a class="btn" href="#" id="capacitor" onclick="ShowCapacitor()">Capactior</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="column">
+            <a class="btn" href="#" id="inductor" onclick="ShowInductor()">Inductor</a>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div id="activeDis" STYLE="display:none;margin-left:50px; padding: 20px;">
+        <form action="#">
+          Active Component Form
+          <input placeholder="Manufacturer Pno*" type="text" required />
+          <input placeholder="Manufacturer*" type="test" required />
+          <input placeholder="Quantity*" type="text" required />
+          <input placeholder="Mounting Style*" type="text" required />
+          <input placeholder="Package/Case*" type="text" required />
+          <textarea placeholder="Description*"></textarea>
+        </form>
+        <br><br>
+          <input class="formBtn" type="submit" />
+          <input class="formBtn" type="reset" />
+      </div>
+
+      <div id="resistorDis" STYLE="display:none;margin-left:50px; padding: 20px;">
+        <form action="#">
+          Resistor Component Form
+          <input placeholder="Value*" type="text" required />
+          <input placeholder="Tolerance(%)*" type="text" required />
+          <input placeholder="Package*" type="text" required />
+          <input placeholder="Wattage*" type="text" required />
+          <input placeholder="Type*" type="text" required />
+          <input placeholder="Manufacturer*" type="test" required />
+          <input placeholder="Quantity*" type="text" required />
+          <textarea placeholder="Description"></textarea>
+        </form>
+        <br><br>
+          <input class="formBtn" type="submit" />
+          <input class="formBtn" type="reset" />
+      </div>
+
+      <div id="capacitorDis" STYLE="display:none;margin-left:50px; padding: 20px;">
+        <form action="#">
+          Capactior Component Form
+          <input placeholder="Value*" type="text" required />
+          <input placeholder="Tolerance(%)*" type="text" required />
+          <input placeholder="Package*" type="text" required />
+          <input placeholder="Voltage*" type="text" required />
+          <input placeholder="Dielectric*" type="text" required />
+          <input placeholder="Type*" type="text" required />
+          <input placeholder="Manufacturer*" type="test" required />
+          <input placeholder="Quantity*" type="text" required />
+          <textarea placeholder="Description"></textarea>
+        </form>
+        <br><br>
+          <input class="formBtn" type="submit" />
+          <input class="formBtn" type="reset" />
+      </div>
+
+      <div id="inductorDis" STYLE="display:none;margin-left:50px; padding: 20px;">
+        <form action="#">
+          inductor Component Form
+          <input placeholder="Value*" type="text" required />
+          <input placeholder="Tolerance(%)*" type="text" required />
+          <input placeholder="Package*" type="text" required />
+          <input placeholder="DC Current*" type="text" required />
+          <input placeholder="DC Resistance*" type="text" required />
+          <input placeholder="Type*" type="text" required />
+          <input placeholder="Manufacturer*" type="test" required />
+          <input placeholder="Quantity*" type="text" required />
+          <textarea placeholder="Description"></textarea>
+        </form>
+        <br><br>
+          <input class="formBtn" type="submit" />
+          <input class="formBtn" type="reset" />
+      </div>
+  
+    </form>
+  </div>
+  <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    var btns = document.getElementsByClassName("myBtn");
+
+    // Get the button that opens the modal
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].onclick = function () {
+        modal.style.display = "block";
+        return btns;
+      }
+
+      function reply_click(clicked_id) {
+        const URL = '/get-coordinates'
+        const xhr = new XMLHttpRequest();
+        sender = JSON.stringify(clicked_id)
+        xhr.open('POST', URL);
+        xhr.send(sender);
+        document.getElementById("value").innerHTML = "Bin Number: " + clicked_id;
+      }
+
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+
+    $(function () {
+
+      // contact form animations
+      $('#contact').click(function () {
+        $('#contactForm').fadeToggle();
+      })
+      $(document).mouseup(function (e) {
+        var container = $("#contactForm");
+
+        if (!container.is(e.target) // if the target of the click isn't the container...
+          && container.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+          container.fadeOut();
+        }
+      });
+
+    });
+
+    function ShowPassive() {
+      var p = document.getElementById('passiveDis');
+      var a = document.getElementById('active');
+      var d = document.getElementById('discrete');
+      var c = document.getElementById('connector');
+      var s = document.getElementById('submitRes');
+      
+      if (p.style.display == 'none') {
+        p.style.display = 'block';
+        a.style.display = 'none';
+        d.style.display = 'none';
+        c.style.display = 'none';
+      } else {
+        p.style.display = 'none';
+        a.style.display = 'block';
+        d.style.display = 'block';
+        c.style.display = 'block';
+      }
+
+    }
+    function ShowAcitve() {
+      var x = document.getElementById('activeDis');
+      var p = document.getElementById('passive');
+      var d = document.getElementById('discrete');;
+      var c = document.getElementById('connector');
+      var s = document.getElementById('submitRes');
+      if (x.style.display == 'none') {
+        x.style.display = 'block';
+        s.style.display = 'block';
+        p.style.display = 'none';
+        d.style.display = 'none';
+        c.style.display = 'none';
+      } else {
+        x.style.display = 'none';
+        s.style.display = 'none';
+        p.style.display = 'block';
+        d.style.display = 'block';
+        c.style.display = 'block';
+      }
+
+    }
+    function ShowResistor() {
+      var x = document.getElementById('resistorDis');
+      var c = document.getElementById('capacitor');
+      var i = document.getElementById('inductor');
+      if (x.style.display == 'none') {
+        x.style.display = 'block';
+        c.style.display = 'none';
+        i.style.display = 'none';
+      } else {
+        x.style.display = 'none';
+        c.style.display = 'block';
+        i.style.display = 'block';
+      }
+
+    }
+    function ShowCapacitor() {
+      var x = document.getElementById('capacitorDis');
+      var r = document.getElementById('resistor');
+      var i = document.getElementById('inductor');
+      if (x.style.display == 'none') {
+        x.style.display = 'block';
+        r.style.display = 'none';
+        i.style.display = 'none';
+      } else {
+        x.style.display = 'none';
+        r.style.display = 'block';
+        i.style.display = 'block';
+      }
+
+    }
+    function ShowInductor() {
+      var x = document.getElementById('inductorDis');
+      var r = document.getElementById('resistor');
+      var c = document.getElementById('capacitor');
+      if (x.style.display == 'none') {
+        x.style.display = 'block';
+        r.style.display = 'none';
+        c.style.display = 'none';
+      } else {
+        x.style.display = 'none';
+        r.style.display = 'block';
+        c.style.display = 'block';
+      }
+
+    }
+  </script>
+</body>
+
+</html>
